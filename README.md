@@ -43,7 +43,7 @@ To get started, follow these steps:
 
 We provide the delivery dates so you can plan accordingly; please take this challenge seriously and try to make progress constantly.
 
-## First Deliverable (Pending...)
+## First Deliverable (March 29th)
 
 Based on the self-study material and mentorship covered until this deliverable, we suggest you perform the following:
 
@@ -59,14 +59,14 @@ In the next link you can see the official [documentation](https://developer.marv
 - Implement the MVVM design pattern for the catalog screen.
 - Implement pagination for the catalog screen, for that, you need to add the offset query in the request.
 
-## Second Deliverable (Pending...)
+## Second Deliverable (April 5th)
 - Work in the detail screen, add a fragment using the MVVM design pattern, you need to use the comics and stories services to get the information related to the selected hero in the catalog screen, the idea is to use the flatMap operator in order to draw the screen once you have the complete information from both services.
 - Extract the business logic from the ViewModel by adding use cases, for that, please create a contract(Interface) that needs to have its own implementation and inject the abstraction in the ViewModel.
 - Add an empty fragment called SearchFragment.
 - Implement the BottomNavigationView and add two items(Characters and Search).
 - Add the navigation graph that contains the fragments and connect the graph with the BottomNavigationView in order to navigate using it.
 
-## Final Deliverable (Pending...)
+## Final Deliverable (April 12th)
 - Work in the search screen, add the MVVM design pattern and use the characters service by adding the nameStartsWith query.
 - Implement pagination for the search screen, you need to add the offset query in the request.
 - Work with gradle:
