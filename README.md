@@ -50,7 +50,7 @@ Based on the self-study material and mentorship covered until this deliverable, 
 - Update the network client in order to consume observers with the next services using the RxJava adapter:
     - https://gateway.marvel.com/v1/public/characters
     - https://gateway.marvel.com/v1/public/characters/{characterId}/comics
-    - https://gateway.marvel.com/v1/public/characters/{characterId}/stories
+    - https://gateway.marvel.com/v1/public/characters/{characterId}/series
 
 In the next link you can see the official [documentation](https://developer.marvel.com/docs#!/public/getCharacterStoryCollection_get_5)
 
@@ -60,7 +60,7 @@ In the next link you can see the official [documentation](https://developer.marv
 - Implement pagination for the catalog screen, for that, you need to add the offset query in the request.
 
 ## Second Deliverable (April 5th)
-- Work in the detail screen, add a fragment using the MVVM design pattern, you need to use the comics and stories services to get the information related to the selected hero in the catalog screen, the idea is to use the flatMap operator in order to draw the screen once you have the complete information from both services.
+- Work in the detail screen, add a fragment using the MVVM design pattern, you need to use the comics and series to get the information related to the selected hero in the catalog screen, the idea is to use a flatMap, zip or other advanced operator in order to draw the screen once you have the complete information from both services.
 - Extract the business logic from the ViewModel by adding use cases, for that, please create a contract(Interface) that needs to have its own implementation and inject the abstraction in the ViewModel.
 - Add an empty fragment called SearchFragment.
 - Implement the BottomNavigationView and add two items(Characters and Search).
@@ -75,6 +75,16 @@ In the next link you can see the official [documentation](https://developer.marv
 - Create a firebase project and implement the android sdk in order to use the remote config feature.
     - Add a flag called "isAppBlocked" in the firebase console.
     - Add a splash screen, check if the app should be blocked at start, if so, show feedback to the users to let them know that the application can't be used at the moment.
+    
+## Mocks
+
+![Splash](spash.png)
+
+![Catalog](catalog.png)
+
+![Detail](detail.png)
+
+![Search](search.png)
 
 ## Documentation
 
