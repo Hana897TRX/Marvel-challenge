@@ -78,7 +78,7 @@ In the next link you can see the official [documentation](https://developer.marv
     
 ## Mocks
 
-![Splash](spash.png)
+![Splash](splash.png)
 
 ![Catalog](catalog.png)
 
