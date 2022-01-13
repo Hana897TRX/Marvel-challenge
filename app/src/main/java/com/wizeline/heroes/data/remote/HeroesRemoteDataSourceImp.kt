@@ -14,7 +14,6 @@ class HeroesRemoteDataSourceImp @Inject constructor(
 ) : HeroesRemoteDataSource {
     override suspend fun getCharacters(): Flow<DataStates<Characters>> = flow {
         try {
-            print(DataUtils.ts)
             val response = service.characters(DataUtils.ts, DataUtils.apikey, DataUtils.getHash())
             if(response.isSuccessful) {
                 response.body()?.let {

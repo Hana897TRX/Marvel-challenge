@@ -1,5 +1,6 @@
 package com.wizeline.heroes.core.di
 
+import com.wizeline.heroes.utils.Network
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -15,7 +16,7 @@ object UtilsModule {
     @Provides
     fun provideRetrofit() : Retrofit {
         return Retrofit.Builder()
-            .baseUrl("https://gateway.marvel.com:443/v1/public/")
+            .baseUrl(Network.baseUrl)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }

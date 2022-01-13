@@ -24,7 +24,7 @@ class HomeFragmentViewModel @Inject constructor(
     }
 
     private fun getCharacters() = viewModelScope.launch(Dispatchers.IO) {
-        heroesUseCase.invoke().collect { response ->
+        heroesUseCase().collect { response ->
             when(response) {
                 is DataStates.Success -> _heroesUIState.emit(DataStates.Success(response.data))
                 is DataStates.Error -> _heroesUIState.emit(DataStates.Error(response.code, response.errorMessage))

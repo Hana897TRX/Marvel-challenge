@@ -6,6 +6,6 @@ import javax.inject.Inject
 class HeroesUseCase @Inject constructor(
     private val repository: HeroesRepository
 ) {
-    suspend fun invoke() =
+    suspend operator fun invoke() =
         repository.getCharacters()
 }
