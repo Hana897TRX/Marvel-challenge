@@ -1,4 +1,7 @@
 package com.wizeline.heroes
 
-class HeroesApp {
-}
+import android.app.Application
+import dagger.hilt.android.HiltAndroidApp
+
+@HiltAndroidApp
+class HeroesApp : Application()

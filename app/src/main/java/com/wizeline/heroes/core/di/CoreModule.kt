@@ -1,4 +1,15 @@
 package com.wizeline.heroes.core.di
 
-class CodeModule {
-}
+import dagger.Module
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
+
+
+@Module(
+    includes = [
+        UtilsModule::class,
+        ServicesModule::class
+    ]
+)
+@InstallIn(SingletonComponent::class)
+object CoreModule

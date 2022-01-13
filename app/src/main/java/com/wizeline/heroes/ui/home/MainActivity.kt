@@ -1,10 +1,9 @@
-package com.wizeline.heroes
+package com.wizeline.heroes.ui.home
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.wizeline.heroes.R
 import dagger.hilt.android.AndroidEntryPoint
-import retrofit2.Call
-import retrofit2.Response
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
