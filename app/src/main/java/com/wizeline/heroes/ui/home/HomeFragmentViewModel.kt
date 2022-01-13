@@ -1,10 +1,13 @@
 package com.wizeline.heroes.ui.home
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.wizeline.heroes.data.models.Characters
+import com.wizeline.heroes.data.models.CharacterModel
 import com.wizeline.heroes.domain.usecases.HeroesUseCase
 import com.wizeline.heroes.utils.DataStates
+import com.wizeline.heroes.utils.Network.OFFSET_CONFIG
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -16,15 +19,42 @@ import javax.inject.Inject
 class HomeFragmentViewModel @Inject constructor(
     private val heroesUseCase: HeroesUseCase
 ): ViewModel() {
-    private var _heroesUIState : MutableStateFlow<DataStates<Characters>> = MutableStateFlow(DataStates.Loading)
-    var heroesUIState : StateFlow<DataStates<Characters>> = _heroesUIState
+    private var _heroesUIState : MutableStateFlow<DataStates<CharacterModel>> = MutableStateFlow(DataStates.Loading)
+    private var _offset : MutableLiveData<Int> = MutableLiveData(0)
+    val offset : LiveData<Int> = _offset
+    var heroesUIState : StateFlow<DataStates<CharacterModel>> = _heroesUIState
 
     init {
-        getCharacters()
+        getCharacters(_offset.value ?: 0)
     }
 
-    private fun getCharacters() = viewModelScope.launch(Dispatchers.IO) {
-        heroesUseCase().collect { response ->
+    fun previousPage() {
+        _offset.value?.let {
+            if(it - OFFSET_CONFIG >= 0) {
+                _offset.value = it - OFFSET_CONFIG
+            }
+            else {
+                _offset.value = 0
+            }
+        }
+    }
+
+    fun nextPage() = _offset.value?.let {
+        _offset.value = it + OFFSET_CONFIG
+    }
+
+    fun setCustomOffset(number: CharSequence?) {
+        if(!number.isNullOrEmpty()) {
+            number.toString().toInt().run {
+                if(_offset.value != this) {
+                    _offset.value = this
+                }
+            }
+        }
+    }
+
+    fun getCharacters(offset : Int) = viewModelScope.launch(Dispatchers.IO) {
+        heroesUseCase(offset).collect { response ->
             when(response) {
                 is DataStates.Success -> _heroesUIState.emit(DataStates.Success(response.data))
                 is DataStates.Error -> _heroesUIState.emit(DataStates.Error(response.code, response.errorMessage))

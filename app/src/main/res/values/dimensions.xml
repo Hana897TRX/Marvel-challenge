@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="margin_16">16dp</dimen>
+    <dimen name="margin_8">8dp</dimen>
+
+    <dimen name="size_100">100dp</dimen>
+    <dimen name="size_50">50dp</dimen>
+
+    <dimen name="corner_200">200dp</dimen>
+
+    <dimen name="corner_15">15dp</dimen>
 
     <dimen name="text_24">24sp</dimen>
 </resources>

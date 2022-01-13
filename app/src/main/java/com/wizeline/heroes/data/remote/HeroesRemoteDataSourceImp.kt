@@ -1,6 +1,6 @@
 package com.wizeline.heroes.data.remote
 
-import com.wizeline.heroes.data.models.Characters
+import com.wizeline.heroes.data.models.CharacterModel
 import com.wizeline.heroes.data.network.HeroesService
 import com.wizeline.heroes.utils.DataStates
 import com.wizeline.heroes.utils.DataUtils
@@ -12,19 +12,24 @@ import kotlin.Exception
 class HeroesRemoteDataSourceImp @Inject constructor(
     private val service: HeroesService
 ) : HeroesRemoteDataSource {
-    override suspend fun getCharacters(): Flow<DataStates<Characters>> = flow {
+    override suspend fun getCharacters(offset: Int): Flow<DataStates<CharacterModel>> = flow {
         try {
-            val response = service.characters(DataUtils.ts, DataUtils.apikey, DataUtils.getHash())
-            if(response.isSuccessful) {
+            val response =
+                service.characters(
+                    offset,
+                    DataUtils.TIME_STAMP,
+                    DataUtils.API_KEY,
+                    DataUtils.getHash()
+                )
+            print(response)
+            if (response.isSuccessful) {
                 response.body()?.let {
                     emit(DataStates.Success(it))
                 } ?: emit(DataStates.Error(response.code(), response.message()))
-            }
-            else {
+            } else {
                 emit(DataStates.Error(response.code(), response.message()))
             }
-        }
-        catch (e : Exception) {
+        } catch (e: Exception) {
             emit(DataStates.Error(0, e.message ?: ""))
         }
     }
