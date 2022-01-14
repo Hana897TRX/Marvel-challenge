@@ -1,23 +1,23 @@
 package com.wizeline.heroes.core.di
 
-import com.wizeline.heroes.data.network.HeroesService
+import com.wizeline.heroes.utils.Network
+import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
-object NetworkModule {
+@Module
+@InstallIn(SingletonComponent::class)
+object UtilsModule {
     @Singleton
     @Provides
     fun provideRetrofit() : Retrofit {
         return Retrofit.Builder()
-            .baseUrl("https://gateway.marvel.com/v1/public/")
+            .baseUrl(Network.baseUrl)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
-
-    @Singleton
-    @Provides
-    fun provideHeroesService(retrofit: Retrofit) : HeroesService =
-        retrofit.create(HeroesService::class.java)
 }
