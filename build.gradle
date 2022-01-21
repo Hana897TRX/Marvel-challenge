@@ -7,7 +7,6 @@ buildscript {
     flow_version = "1.6.0"
     lifecycle_version = "2.4.0"
     glide_version = "4.12.0"
-    coroutines_version = "1.6.0"
   }
 
   repositories {
@@ -20,11 +19,11 @@ buildscript {
     classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.6.10"
 
     // Retrofit
-    classpath "com.squareup.retrofit2:retrofit:$retrofit_version"
-    classpath "com.squareup.retrofit2:converter-gson:$retrofit_version"
+    classpath "com.squareup.retrofit2:retrofit:2.9.0"
+    classpath "com.squareup.retrofit2:converter-gson:2.9.0"
 
     //Corrutinas
-    classpath "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version"
+    classpath 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.0'
 
     // Dagger hilt
     classpath "com.google.dagger:hilt-android-gradle-plugin:$dagger_hilt"
