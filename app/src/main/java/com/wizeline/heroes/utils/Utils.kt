@@ -21,18 +21,18 @@ object Network {
 
 object GlideUtils {
     @SuppressLint("StaticFieldLeak")
-    private var glide : RequestManager? = null
+    private var GLIDE_INSTANCE : RequestManager? = null
 
     fun getInstance(context : Context) : RequestManager {
-        return if(glide == null) {
-            glide = Glide.with(context)
-            glide!!
+        return if(GLIDE_INSTANCE == null) {
+            GLIDE_INSTANCE = Glide.with(context)
+            GLIDE_INSTANCE!!
         } else {
-            glide!!
+            GLIDE_INSTANCE!!
         }
     }
 
     fun eraseInstance() {
-        glide = null
+        GLIDE_INSTANCE = null
     }
 }
