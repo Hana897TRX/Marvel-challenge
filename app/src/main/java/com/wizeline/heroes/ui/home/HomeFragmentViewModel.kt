@@ -1,5 +1,6 @@
 package com.wizeline.heroes.ui.home
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -13,6 +14,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import java.lang.Exception
 import javax.inject.Inject
 
 @HiltViewModel
@@ -44,12 +46,17 @@ class HomeFragmentViewModel @Inject constructor(
     }
 
     fun setCustomOffset(number: CharSequence?) {
-        if(!number.isNullOrEmpty()) {
-            number.toString().toInt().run {
-                if(_offset.value != this) {
-                    _offset.value = this
+        try {
+            if (!number.isNullOrEmpty()) {
+                number.toString().toInt().run {
+                    if (_offset.value != this) {
+                        _offset.value = this
+                    }
                 }
             }
+        }
+        catch (e : Exception) {
+            Log.e("OFFSET", e.message ?: "")
         }
     }
 
