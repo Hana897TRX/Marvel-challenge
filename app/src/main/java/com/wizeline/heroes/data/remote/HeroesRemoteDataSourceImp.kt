@@ -1,6 +1,6 @@
 package com.wizeline.heroes.data.remote
 
-import com.wizeline.heroes.data.models.CharacterModel
+import com.wizeline.heroes.data.models.model.home.CharacterModel
 import com.wizeline.heroes.data.network.HeroesService
 import com.wizeline.heroes.utils.DataStates
 import com.wizeline.heroes.utils.DataUtils

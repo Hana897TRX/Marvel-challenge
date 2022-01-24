@@ -1,4 +1,4 @@
-package com.wizeline.heroes.data.models
+package com.wizeline.heroes.data.models.model.home
 
 data class DataModel(
     val offset: Int,

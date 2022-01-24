@@ -4,9 +4,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
-import com.wizeline.heroes.data.models.ResultModel
+import com.wizeline.heroes.data.models.model.home.ResultModel
 import com.wizeline.heroes.databinding.CharacterLayoutBinding
-import javax.inject.Inject
 
 class CharactersAdapter : ListAdapter<ResultModel, CharacterHolder>(DiffUtilCallback()) {
     private class DiffUtilCallback : DiffUtil.ItemCallback<ResultModel>() {

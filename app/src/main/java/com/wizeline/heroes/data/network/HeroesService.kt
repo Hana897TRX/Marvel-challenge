@@ -1,6 +1,6 @@
 package com.wizeline.heroes.data.network
 
-import com.wizeline.heroes.data.models.CharacterModel
+import com.wizeline.heroes.data.models.model.home.CharacterModel
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query

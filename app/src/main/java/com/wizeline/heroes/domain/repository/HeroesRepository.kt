@@ -1,6 +1,6 @@
 package com.wizeline.heroes.domain.repository
 
-import com.wizeline.heroes.data.models.CharacterModel
+import com.wizeline.heroes.data.models.model.home.CharacterModel
 import com.wizeline.heroes.utils.DataStates
 import kotlinx.coroutines.flow.Flow
 

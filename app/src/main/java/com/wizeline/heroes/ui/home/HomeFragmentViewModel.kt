@@ -1,16 +1,13 @@
 package com.wizeline.heroes.ui.home
 
 import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.wizeline.heroes.data.models.CharacterModel
+import com.wizeline.heroes.data.models.model.home.CharacterModel
 import com.wizeline.heroes.domain.usecases.HeroesUseCase
 import com.wizeline.heroes.utils.DataStates
 import com.wizeline.heroes.utils.Network.OFFSET_CONFIG
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import java.lang.Exception
