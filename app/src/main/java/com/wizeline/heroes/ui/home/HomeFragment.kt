@@ -13,17 +13,22 @@ import com.wizeline.heroes.makeToast
 import com.wizeline.heroes.ui.adapter.CharactersAdapter
 import com.wizeline.heroes.utils.DataStates
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
 
-    private var _binding : FragmentHomeBinding? = null
+    private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
-    private val viewModel : HomeFragmentViewModel by viewModels()
+    private val viewModel: HomeFragmentViewModel by viewModels()
     private val charactersAdapter = CharactersAdapter()
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -38,25 +43,26 @@ class HomeFragment : Fragment() {
     }
 
     private fun setCharactersObservable() = lifecycleScope.launch {
-        repeatOnLifecycle(Lifecycle.State.STARTED) {
-            viewModel.heroesUIState.collect { response ->
-                when(response) {
-                    is DataStates.Error -> makeToast(requireContext(), "${response.code} ${response.errorMessage}")
-                    is DataStates.Loading -> Unit // TODO ANIMATION
-                    is DataStates.Success -> charactersAdapter.submitList(response.data.data.results)
-                }
+        viewModel.heroesUIState.collect { response ->
+            when (response) {
+                is DataStates.Error -> makeToast(
+                    requireContext(),
+                    "${response.code} ${response.errorMessage}"
+                )
+                is DataStates.Loading -> Unit // TODO ANIMATION
+                is DataStates.Success -> charactersAdapter.submitList(response.data.data.results)
             }
         }
     }
 
     private fun offsetObservable() = lifecycleScope.launch {
-        viewModel.offset.observe(viewLifecycleOwner, {
+        viewModel.offset.debounce(200).collect {
             binding.homeTextOffset.setText(it.toString())
             viewModel.getCharacters(it)
-        })
+        }
     }
 
-    private fun addViewFunctions() = binding.apply{
+    private fun addViewFunctions() = binding.apply {
         homeButtonLeft.setOnClickListener { viewModel.previousPage() }
         homeButtonRight.setOnClickListener { viewModel.nextPage() }
         homeTextOffset.doOnTextChanged { text, _, _, _ ->
