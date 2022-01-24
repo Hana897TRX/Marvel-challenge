@@ -11,8 +11,7 @@ import com.wizeline.heroes.utils.DataStates
 import com.wizeline.heroes.utils.Network.OFFSET_CONFIG
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import java.lang.Exception
 import javax.inject.Inject
@@ -20,51 +19,52 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeFragmentViewModel @Inject constructor(
     private val heroesUseCase: HeroesUseCase
-): ViewModel() {
-    private var _heroesUIState : MutableStateFlow<DataStates<CharacterModel>> = MutableStateFlow(DataStates.Loading)
-    private var _offset : MutableLiveData<Int> = MutableLiveData(0)
-    val offset : LiveData<Int> = _offset
-    var heroesUIState : StateFlow<DataStates<CharacterModel>> = _heroesUIState
+) : ViewModel() {
+    private var _heroesUIState: MutableStateFlow<DataStates<CharacterModel>> = MutableStateFlow(DataStates.Loading)
+    private var _offset: MutableStateFlow<Int> = MutableStateFlow(0)
+
+    var heroesUIState: StateFlow<DataStates<CharacterModel>> = _heroesUIState
+    val offset: StateFlow<Int> = _offset
 
     init {
-        getCharacters(_offset.value ?: 0)
+        getCharacters(_offset.value)
     }
 
-    fun previousPage() {
-        _offset.value?.let {
-            if(it - OFFSET_CONFIG >= 0) {
-                _offset.value = it - OFFSET_CONFIG
-            }
-            else {
-                _offset.value = 0
-            }
-        }
+    fun previousPage() = viewModelScope.launch {
+        if (_offset.value - OFFSET_CONFIG >= 0)
+            _offset.emit(_offset.value - OFFSET_CONFIG)
+        else
+            _offset.emit(0)
     }
 
-    fun nextPage() = _offset.value?.let {
-        _offset.value = it + OFFSET_CONFIG
+    fun nextPage() = viewModelScope.launch {
+        _offset.emit(_offset.value + OFFSET_CONFIG)
     }
 
-    fun setCustomOffset(number: CharSequence?) {
+    fun setCustomOffset(number: CharSequence?) = viewModelScope.launch {
         try {
             if (!number.isNullOrEmpty()) {
                 number.toString().toInt().run {
                     if (_offset.value != this) {
-                        _offset.value = this
+                        _offset.emit(this)
                     }
                 }
             }
-        }
-        catch (e : Exception) {
+        } catch (e: Exception) {
             Log.e("OFFSET", e.message ?: "")
         }
     }
 
-    fun getCharacters(offset : Int) = viewModelScope.launch(Dispatchers.IO) {
+    fun getCharacters(offset: Int) = viewModelScope.launch {
         heroesUseCase(offset).collect { response ->
-            when(response) {
+            when (response) {
                 is DataStates.Success -> _heroesUIState.emit(DataStates.Success(response.data))
-                is DataStates.Error -> _heroesUIState.emit(DataStates.Error(response.code, response.errorMessage))
+                is DataStates.Error -> _heroesUIState.emit(
+                    DataStates.Error(
+                        response.code,
+                        response.errorMessage
+                    )
+                )
                 is DataStates.Loading -> _heroesUIState.emit(DataStates.Loading)
             }
         }
