@@ -7,7 +7,11 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.wizeline.heroes.databinding.FragmentHomeBinding
+<<<<<<< HEAD
 import com.wizeline.heroes.utils.makeToast
+=======
+import com.wizeline.heroes.makeToast
+>>>>>>> a452a6a (Feature: Detail service working)
 import com.wizeline.heroes.ui.adapter.character.CharactersAdapter
 import com.wizeline.heroes.utils.DataStates
 import com.wizeline.heroes.utils.hide
@@ -50,13 +54,22 @@ class HomeFragment : Fragment() {
                         requireContext(),
                         "${response.code} ${response.errorMessage}"
                     )
+<<<<<<< HEAD
                     binding.homeCharacterProgressBar.hide()
+=======
+                    binding.homeCharacterProgressBar.visibility = View.INVISIBLE
+>>>>>>> a452a6a (Feature: Detail service working)
                 }
                 is DataStates.Loading -> Unit
                 is DataStates.Success -> {
                     binding.apply {
+<<<<<<< HEAD
                         homeCharacterProgressBar.hide()
                         homeCharactersRv.show()
+=======
+                        homeCharacterProgressBar.visibility = View.INVISIBLE
+                        homeCharactersRv.visibility = View.VISIBLE
+>>>>>>> a452a6a (Feature: Detail service working)
                     }
                     charactersAdapter.submitList(response.data.results)
                 }

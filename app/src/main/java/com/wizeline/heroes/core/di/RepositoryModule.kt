@@ -8,6 +8,8 @@ import com.wizeline.heroes.data.remote.series.SeriesRemoteDataSource
 import com.wizeline.heroes.data.remote.series.SeriesRemoteDataSourceImp
 import com.wizeline.heroes.domain.repository.characters.HeroesRepository
 import com.wizeline.heroes.domain.repository.characters.HeroesRepositoryImp
+import com.wizeline.heroes.domain.repository.comics.ComicsRepository
+import com.wizeline.heroes.domain.repository.comics.ComicsRepositoryImp
 import com.wizeline.heroes.domain.repository.series.SeriesRepository
 import com.wizeline.heroes.domain.repository.series.SeriesRepositoryImp
 import dagger.Binds
@@ -45,4 +47,9 @@ internal abstract class RepositoryModule {
     abstract fun bindComicDataSource(
         impl : ComicsRemoteDataSourceImp
     ) : ComicsRemoteDataSource
+
+    @Binds
+    abstract fun bindComicRepository(
+        impl: ComicsRepositoryImp
+    ) : ComicsRepository
 }

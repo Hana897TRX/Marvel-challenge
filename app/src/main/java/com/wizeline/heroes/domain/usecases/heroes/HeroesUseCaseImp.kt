@@ -1,11 +1,11 @@
-package com.wizeline.heroes.domain.usecases
+package com.wizeline.heroes.domain.usecases.heroes
 
 import com.wizeline.heroes.domain.repository.characters.HeroesRepository
 import javax.inject.Inject
 
-class HeroesUseCase @Inject constructor(
+class HeroesUseCaseImp @Inject constructor(
     private val repository: HeroesRepository
-) {
-    suspend operator fun invoke(offset : Int) =
+) : HeroesUseCase {
+    override suspend operator fun invoke(offset : Int) =
         repository.getCharacters(offset)
 }

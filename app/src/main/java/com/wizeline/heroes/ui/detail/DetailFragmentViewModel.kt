@@ -2,13 +2,10 @@ package com.wizeline.heroes.ui.detail
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.wizeline.heroes.data.models.model.detail.CharacterSeriesModel
-import com.wizeline.heroes.data.models.model.home.DataModel
 import com.wizeline.heroes.data.models.model.home.ResultModel
 import com.wizeline.heroes.data.models.model.series.SeriesModel
-import com.wizeline.heroes.data.remote.comics.ComicsRemoteDataSource
-import com.wizeline.heroes.data.remote.series.SeriesRemoteDataSource
-import com.wizeline.heroes.utils.ConstVals.EMPTY_VALUE
+import com.wizeline.heroes.domain.usecases.comics.ComicsUseCase
+import com.wizeline.heroes.domain.usecases.series.SeriesUseCase
 import com.wizeline.heroes.utils.DataStates
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -18,8 +15,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class DetailFragmentViewModel @Inject constructor(
-    private val comicsUseCase: ComicsRemoteDataSource,
-    private val seriesUseCase: SeriesRemoteDataSource
+    private val comicsUseCase: ComicsUseCase,
+    private val seriesUseCase: SeriesUseCase
 ) : ViewModel() {
     private var _comicsUIState: MutableStateFlow<DataStates<SeriesModel>> =
         MutableStateFlow(DataStates.Loading)
