@@ -1,37 +1,23 @@
 package com.wizeline.heroes.ui.detail
 
 import android.os.Bundle
-import android.util.LayoutDirection
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-<<<<<<< HEAD
-=======
-import androidx.navigation.fragment.navArgs
->>>>>>> a452a6a (Feature: Detail service working)
 import com.wizeline.heroes.R
 import com.wizeline.heroes.data.models.model.series.SeriesModel
 import com.wizeline.heroes.databinding.FragmentDetailBinding
 import com.wizeline.heroes.ui.adapter.Series.SeriesDataAdapter
 import com.wizeline.heroes.utils.DataStates
 import com.wizeline.heroes.utils.GlideUtils
-<<<<<<< HEAD
 import com.wizeline.heroes.utils.hide
 import com.wizeline.heroes.utils.show
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.zip
 import kotlinx.coroutines.launch
-=======
-import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.flow.zip
-import kotlinx.coroutines.launch
-import javax.inject.Inject
->>>>>>> a452a6a (Feature: Detail service working)
 
 @AndroidEntryPoint
 class DetailFragment : Fragment() {
@@ -87,7 +73,6 @@ class DetailFragment : Fragment() {
     }
 
     private fun setInvisibleProgress() = binding.apply {
-<<<<<<< HEAD
         comicsProgressBar.hide()
         seriesProgressBar.hide()
     }
@@ -95,15 +80,6 @@ class DetailFragment : Fragment() {
     private fun setVisibleRV() = binding.apply {
         detailComicsRv.show()
         detailSeriesRv.show()
-=======
-        comicsProgressBar.visibility = View.INVISIBLE
-        seriesProgressBar.visibility = View.INVISIBLE
-    }
-
-    private fun setVisibleRV() = binding.apply {
-        detailComicsRv.visibility = View.VISIBLE
-        detailSeriesRv.visibility = View.VISIBLE
->>>>>>> a452a6a (Feature: Detail service working)
     }
 
     private fun setView() = binding.apply {
