@@ -1,6 +1,7 @@
-package com.wizeline.heroes
+package com.wizeline.heroes.utils
 
 import android.content.Context
+import android.view.View
 import android.widget.Toast
 import java.math.BigInteger
 import java.security.MessageDigest
@@ -12,4 +13,12 @@ fun String.toMD5(): String {
 
 fun makeToast(context : Context, text : String) {
     Toast.makeText(context, text, Toast.LENGTH_SHORT).show()
+}
+
+fun View.hide() {
+    this.visibility = View.INVISIBLE
+}
+
+fun View.show() {
+    this.visibility = View.VISIBLE
 }

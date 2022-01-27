@@ -5,6 +5,9 @@
       <map>
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.2572463768115942" />
         <entry key="app/src/main/res/layout/character_layout.xml" value="0.5" />
+        <entry key="app/src/main/res/layout/detail_series_item.xml" value="0.21041666666666667" />
+        <entry key="app/src/main/res/layout/details_comics_series_item.xml" value="0.5" />
+        <entry key="app/src/main/res/layout/fragment_detail.xml" value="0.375" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.375" />
       </map>
     </option>

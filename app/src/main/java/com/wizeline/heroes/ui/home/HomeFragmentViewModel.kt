@@ -1,16 +1,14 @@
 package com.wizeline.heroes.ui.home
 
 import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.wizeline.heroes.data.models.CharacterModel
+import com.wizeline.heroes.data.models.model.home.DataModel
+import com.wizeline.heroes.data.models.model.home.MarvelResponse
 import com.wizeline.heroes.domain.usecases.HeroesUseCase
 import com.wizeline.heroes.utils.DataStates
 import com.wizeline.heroes.utils.Network.OFFSET_CONFIG
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import java.lang.Exception
@@ -20,10 +18,10 @@ import javax.inject.Inject
 class HomeFragmentViewModel @Inject constructor(
     private val heroesUseCase: HeroesUseCase
 ) : ViewModel() {
-    private var _heroesUIState: MutableStateFlow<DataStates<CharacterModel>> = MutableStateFlow(DataStates.Loading)
+    private var _heroesUIState: MutableStateFlow<DataStates<DataModel>> = MutableStateFlow(DataStates.Loading)
     private var _offset: MutableStateFlow<Int> = MutableStateFlow(0)
 
-    var heroesUIState: StateFlow<DataStates<CharacterModel>> = _heroesUIState
+    var heroesUIState: StateFlow<DataStates<DataModel>> = _heroesUIState
     val offset: StateFlow<Int> = _offset
 
     init {

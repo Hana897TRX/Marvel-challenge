@@ -5,10 +5,13 @@
 
     <dimen name="size_100">100dp</dimen>
     <dimen name="size_50">50dp</dimen>
+    <dimen name="size_75">75dp</dimen>
+    <dimen name="size_200">200dp</dimen>
 
     <dimen name="corner_200">200dp</dimen>
 
     <dimen name="corner_15">15dp</dimen>
 
     <dimen name="text_24">24sp</dimen>
+    <dimen name="text_20">20sp</dimen>
 </resources>

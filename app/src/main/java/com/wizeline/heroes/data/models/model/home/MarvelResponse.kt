@@ -1,11 +1,11 @@
-package com.wizeline.heroes.data.models
+package com.wizeline.heroes.data.models.model.home
 
-data class CharacterModel(
+data class MarvelResponse<out T>(
     val code: Int,
     val status: String,
     val copyright: String,
     val attributionText: String,
     val attributionHTML: String,
     val etag: String,
-    val data: DataModel
+    val data: T
 )

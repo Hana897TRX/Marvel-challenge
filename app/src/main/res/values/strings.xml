@@ -4,4 +4,9 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="characters">Characters</string>
     <string name="zero">0</string>
+    
+    <!-- Detail Fragment -->
+    <string name="comics">Comics</string>
+    <string name="series">Series</string>
+
 </resources>

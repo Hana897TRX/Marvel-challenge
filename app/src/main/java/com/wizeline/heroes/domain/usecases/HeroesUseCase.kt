@@ -1,6 +1,6 @@
 package com.wizeline.heroes.domain.usecases
 
-import com.wizeline.heroes.domain.repository.HeroesRepository
+import com.wizeline.heroes.domain.repository.characters.HeroesRepository
 import javax.inject.Inject
 
 class HeroesUseCase @Inject constructor(

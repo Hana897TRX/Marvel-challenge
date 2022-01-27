@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.content.Context
 import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestManager
-import com.wizeline.heroes.toMD5
 
 object DataUtils {
     const val PRIVATE_KEY = ""
@@ -14,9 +13,18 @@ object DataUtils {
     fun getHash() = (TIME_STAMP + PRIVATE_KEY + API_KEY).toMD5()
 }
 
+object ConstVals {
+    const val EMPTY_VALUE = ""
+}
+
 object Network {
     const val OFFSET_CONFIG = 20
     const val BASE_URL = "https://gateway.marvel.com:443/v1/public/"
+    const val QUERY_CHARACTER_ID = "characterId"
+    const val QUERY_TS = "ts"
+    const val QUERY_API_KEY = "apikey"
+    const val QUERY_HASH = "hash"
+    const val QUERY_OFFSET = "offset"
 }
 
 object GlideUtils {
