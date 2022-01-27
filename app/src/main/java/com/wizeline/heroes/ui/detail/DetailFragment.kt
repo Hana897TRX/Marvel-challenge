@@ -1,14 +1,12 @@
 package com.wizeline.heroes.ui.detail
 
 import android.os.Bundle
-import android.util.LayoutDirection
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.navArgs
 import com.wizeline.heroes.R
 import com.wizeline.heroes.data.models.model.series.SeriesModel
 import com.wizeline.heroes.databinding.FragmentDetailBinding
@@ -18,11 +16,8 @@ import com.wizeline.heroes.utils.GlideUtils
 import com.wizeline.heroes.utils.hide
 import com.wizeline.heroes.utils.show
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.zip
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class DetailFragment : Fragment() {

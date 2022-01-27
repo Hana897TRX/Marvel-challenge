@@ -4,8 +4,7 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.wizeline.heroes.data.models.model.home.DataModel
-import com.wizeline.heroes.data.models.model.home.MarvelResponse
-import com.wizeline.heroes.domain.usecases.HeroesUseCase
+import com.wizeline.heroes.domain.usecases.heroes.HeroesUseCase
 import com.wizeline.heroes.utils.DataStates
 import com.wizeline.heroes.utils.Network.OFFSET_CONFIG
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -54,7 +53,7 @@ class HomeFragmentViewModel @Inject constructor(
     }
 
     fun getCharacters(offset: Int) = viewModelScope.launch {
-        heroesUseCase(offset).collect { response ->
+        heroesUseCase.invoke(offset).collect { response ->
             when (response) {
                 is DataStates.Success -> _heroesUIState.emit(DataStates.Success(response.data))
                 is DataStates.Error -> _heroesUIState.emit(
