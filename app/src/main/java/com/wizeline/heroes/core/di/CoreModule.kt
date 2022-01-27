@@ -8,7 +8,8 @@ import dagger.hilt.components.SingletonComponent
 @Module(
     includes = [
         UtilsModule::class,
-        ServicesModule::class
+        ServicesModule::class,
+        UseCaseModule::class
     ]
 )
 @InstallIn(SingletonComponent::class)
