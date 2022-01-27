@@ -1,4 +1,4 @@
-package com.wizeline.heroes.ui.adapter
+package com.wizeline.heroes.ui.adapter.character
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

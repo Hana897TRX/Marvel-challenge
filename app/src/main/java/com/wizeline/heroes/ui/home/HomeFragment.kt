@@ -5,13 +5,13 @@ import android.view.*
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import com.wizeline.heroes.databinding.FragmentHomeBinding
-import com.wizeline.heroes.makeToast
-import com.wizeline.heroes.ui.adapter.CharactersAdapter
+import com.wizeline.heroes.utils.makeToast
+import com.wizeline.heroes.ui.adapter.character.CharactersAdapter
 import com.wizeline.heroes.utils.DataStates
+import com.wizeline.heroes.utils.hide
+import com.wizeline.heroes.utils.show
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.launch
@@ -45,12 +45,21 @@ class HomeFragment : Fragment() {
     private fun setCharactersObservable() = lifecycleScope.launch {
         viewModel.heroesUIState.collect { response ->
             when (response) {
-                is DataStates.Error -> makeToast(
-                    requireContext(),
-                    "${response.code} ${response.errorMessage}"
-                )
-                is DataStates.Loading -> Unit // TODO ANIMATION
-                is DataStates.Success -> charactersAdapter.submitList(response.data.data.results)
+                is DataStates.Error -> {
+                    makeToast(
+                        requireContext(),
+                        "${response.code} ${response.errorMessage}"
+                    )
+                    binding.homeCharacterProgressBar.hide()
+                }
+                is DataStates.Loading -> Unit
+                is DataStates.Success -> {
+                    binding.apply {
+                        homeCharacterProgressBar.hide()
+                        homeCharactersRv.show()
+                    }
+                    charactersAdapter.submitList(response.data.results)
+                }
             }
         }
     }

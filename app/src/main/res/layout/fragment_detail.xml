@@ -74,6 +74,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/size_100"
                 android:layout_marginTop="@dimen/margin_16"
+                android:orientation="horizontal"
+                android:visibility="invisible"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/detail_character_comics_title"
@@ -102,6 +105,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/size_100"
                 android:layout_marginTop="@dimen/margin_16"
+                android:orientation="horizontal"
+                android:visibility="invisible"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -109,6 +115,26 @@
                 tools:ignore="SpeakableTextPresentCheck"
                 tools:itemCount="3"
                 tools:listitem="@layout/detail_series_item" />
+
+            <ProgressBar
+                android:id="@+id/comics_progress_bar"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@+id/detail_comics_rv"
+                app:layout_constraintEnd_toEndOf="@+id/detail_comics_rv"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/detail_comics_rv" />
+
+            <ProgressBar
+                android:id="@+id/series_progress_bar"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/detail_series_rv" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 
