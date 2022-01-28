@@ -37,12 +37,4 @@ interface HeroesService {
         @Query(QUERY_API_KEY) apikey: String,
         @Query(QUERY_HASH) hash: String,
     ) : Response<MarvelResponse<SeriesResponse>>
-
-    @GET("characters/{characterId}/stories")
-    suspend fun getStories(
-        @Path("characterId") characterId : String,
-        @Query("ts") ts: String,
-        @Query("apikey") apikey: String,
-        @Query("hash") hash: String,
-    )
 }

@@ -73,7 +73,6 @@ dependencies {
   annotationProcessor "com.github.bumptech.glide:compiler:$glide_version"
 
   // Safe Args
-
   implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
   implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
 }

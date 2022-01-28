@@ -3,7 +3,7 @@ buildscript {
     kotlin_version = "1.4.30"
     retrofit_version = "2.9.0"
     dagger_hilt = "2.38.1"
-    nav_version = "2.4.0-rc01"
+    nav_version = "2.5.0-alpha01"
     flow_version = "1.6.0"
     lifecycle_version = "2.4.0"
     glide_version = "4.12.0"

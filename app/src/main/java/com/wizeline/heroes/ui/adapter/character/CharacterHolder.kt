@@ -24,7 +24,7 @@ class CharacterHolder(private val binding: CharacterLayoutBinding) :
 
         characterCardView.setOnClickListener {
             it.findNavController().navigate(
-                HomeFragmentDirections.actionHomeFragmentToDetailFragment2(characterData = data)
+                HomeFragmentDirections.actionHomeFragmentToDetailFragment2(data)
             )
         }
     }
