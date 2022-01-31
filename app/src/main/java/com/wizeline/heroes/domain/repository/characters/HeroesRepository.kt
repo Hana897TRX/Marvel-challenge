@@ -6,5 +6,5 @@ import com.wizeline.heroes.utils.DataStates
 import kotlinx.coroutines.flow.Flow
 
 interface HeroesRepository {
-    suspend fun getCharacters(offset : Int) : Flow<DataStates<DataModel>>
+    suspend fun getCharacters(nameStartsWith : String?, offset: Int) : Flow<DataStates<DataModel>>
 }

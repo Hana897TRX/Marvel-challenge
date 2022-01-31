@@ -25,6 +25,7 @@ object Network {
     const val QUERY_API_KEY = "apikey"
     const val QUERY_HASH = "hash"
     const val QUERY_OFFSET = "offset"
+    const val NAME_STARTS_WITH = "nameStartsWith"
 }
 
 object GlideUtils {
