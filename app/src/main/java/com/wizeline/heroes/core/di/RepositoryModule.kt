@@ -2,12 +2,16 @@ package com.wizeline.heroes.core.di
 
 import com.wizeline.heroes.data.remote.characters.HeroesRemoteDataSource
 import com.wizeline.heroes.data.remote.characters.HeroesRemoteDataSourceImp
+import com.wizeline.heroes.data.remote.characters.HeroesRemoteDataSourceRx
+import com.wizeline.heroes.data.remote.characters.HeroesRemoteDataSourceRxImp
 import com.wizeline.heroes.data.remote.comics.ComicsRemoteDataSource
 import com.wizeline.heroes.data.remote.comics.ComicsRemoteDataSourceImp
 import com.wizeline.heroes.data.remote.series.SeriesRemoteDataSource
 import com.wizeline.heroes.data.remote.series.SeriesRemoteDataSourceImp
 import com.wizeline.heroes.domain.repository.characters.HeroesRepository
 import com.wizeline.heroes.domain.repository.characters.HeroesRepositoryImp
+import com.wizeline.heroes.domain.repository.characters.HeroesRepositoryRx
+import com.wizeline.heroes.domain.repository.characters.HeroesRepositoryRxImp
 import com.wizeline.heroes.domain.repository.comics.ComicsRepository
 import com.wizeline.heroes.domain.repository.comics.ComicsRepositoryImp
 import com.wizeline.heroes.domain.repository.series.SeriesRepository
@@ -52,4 +56,14 @@ internal abstract class RepositoryModule {
     abstract fun bindComicRepository(
         impl: ComicsRepositoryImp
     ) : ComicsRepository
+
+    @Binds
+    abstract fun bindHeroesRepositoryRx(
+        impl: HeroesRepositoryRxImp
+    ) : HeroesRepositoryRx
+
+    @Binds
+    abstract fun bindHeroesRemoteDataSourceRx(
+        impl: HeroesRemoteDataSourceRxImp
+    ) : HeroesRemoteDataSourceRx
 }

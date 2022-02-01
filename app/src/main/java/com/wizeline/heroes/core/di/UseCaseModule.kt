@@ -4,6 +4,8 @@ import com.wizeline.heroes.domain.usecases.comics.ComicsUseCase
 import com.wizeline.heroes.domain.usecases.comics.ComicsUseCaseImp
 import com.wizeline.heroes.domain.usecases.heroes.HeroesUseCase
 import com.wizeline.heroes.domain.usecases.heroes.HeroesUseCaseImp
+import com.wizeline.heroes.domain.usecases.heroes.HeroesUseCaseRx
+import com.wizeline.heroes.domain.usecases.heroes.HeroesUseCaseRxImp
 import com.wizeline.heroes.domain.usecases.search.SearchUseCase
 import com.wizeline.heroes.domain.usecases.search.SearchUseCaseImp
 import com.wizeline.heroes.domain.usecases.series.SeriesUseCase
@@ -37,4 +39,9 @@ internal abstract class UseCaseModule {
     abstract fun bindSearchUseCase(
         impl : SearchUseCaseImp
     ) : SearchUseCase
+
+    @Binds
+    abstract fun bindHeroesUseCaseRx(
+        impl : HeroesUseCaseRxImp
+    ) : HeroesUseCaseRx
 }
