@@ -16,6 +16,7 @@ import com.wizeline.heroes.utils.DataStates
 import com.wizeline.heroes.utils.hide
 import com.wizeline.heroes.utils.show
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -41,6 +42,8 @@ class SearchFragment : Fragment() {
         observeSearchInput()
         setView()
         observeCharacters()
+        offsetObservable()
+        addViewFunctions()
     }
 
     private fun observeSearchInput() = binding.apply {
@@ -72,6 +75,20 @@ class SearchFragment : Fragment() {
                     charactersAdapter.submitList(response.data.results)
                 }
             }
+        }
+    }
+
+    private fun offsetObservable() = lifecycleScope.launch {
+        viewModel.offset.collect {
+            binding.homeTextOffset.setText(it.toString())
+        }
+    }
+
+    private fun addViewFunctions() = binding.apply {
+        homeButtonLeft.setOnClickListener { viewModel.previousPage() }
+        homeButtonRight.setOnClickListener { viewModel.nextPage() }
+        homeTextOffset.doOnTextChanged { text, _, _, _ ->
+            viewModel.setCustomOffset(text)
         }
     }
 
