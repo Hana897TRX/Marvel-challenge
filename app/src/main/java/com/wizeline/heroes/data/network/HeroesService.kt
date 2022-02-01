@@ -3,6 +3,7 @@ package com.wizeline.heroes.data.network
 import com.wizeline.heroes.data.models.model.home.DataModel
 import com.wizeline.heroes.data.models.model.home.MarvelResponse
 import com.wizeline.heroes.data.models.response.detail.series.SeriesResponse
+import com.wizeline.heroes.utils.Network.NAME_STARTS_WITH
 import com.wizeline.heroes.utils.Network.QUERY_API_KEY
 import com.wizeline.heroes.utils.Network.QUERY_CHARACTER_ID
 import com.wizeline.heroes.utils.Network.QUERY_HASH
@@ -17,6 +18,7 @@ interface HeroesService {
     @GET("characters")
     suspend fun characters(
         @Query(QUERY_OFFSET) offset : Int,
+        @Query(NAME_STARTS_WITH) nameStartsWith : String? = null,
         @Query(QUERY_TS) ts: String,
         @Query(QUERY_API_KEY) apikey: String,
         @Query(QUERY_HASH) hash: String,

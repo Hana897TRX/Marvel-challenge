@@ -7,5 +7,5 @@ class HeroesUseCaseImp @Inject constructor(
     private val repository: HeroesRepository
 ) : HeroesUseCase {
     override suspend operator fun invoke(offset : Int) =
-        repository.getCharacters(offset)
+        repository.getCharacters(null, offset)
 }

@@ -7,14 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.wizeline.heroes.R
 import com.wizeline.heroes.data.models.model.series.SeriesModel
 import com.wizeline.heroes.databinding.FragmentDetailBinding
 import com.wizeline.heroes.ui.adapter.Series.SeriesDataAdapter
-import com.wizeline.heroes.utils.DataStates
-import com.wizeline.heroes.utils.GlideUtils
-import com.wizeline.heroes.utils.hide
-import com.wizeline.heroes.utils.show
+import com.wizeline.heroes.utils.*
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.zip
 import kotlinx.coroutines.launch
@@ -55,31 +53,35 @@ class DetailFragment : Fragment() {
             Pair(comics, series)
         }.collect { pair ->
             when (pair.first) {
-                is DataStates.Error -> setInvisibleProgress()
+                is DataStates.Error -> binding.apply {
+                    detailDataProgress.hide()
+                }
                 is DataStates.Loading -> Unit
-                is DataStates.Success -> comicsDataAdapter.submitList((pair.first as DataStates.Success<SeriesModel>).data.results)
+                is DataStates.Success -> binding.apply {
+                    if((pair.first as DataStates.Success<SeriesModel>).data.results.isNotEmpty()) {
+                        cardComics.show()
+                        detailComicsRv.show()
+                    }
+                    detailDataProgress.hide()
+                    comicsDataAdapter.submitList((pair.first as DataStates.Success<SeriesModel>).data.results)
+                }
             }
 
             when (pair.second) {
-                is DataStates.Error -> setInvisibleProgress()
+                is DataStates.Error -> binding.apply {
+                    detailDataProgress.hide()
+                }
                 is DataStates.Loading -> Unit
-                is DataStates.Success -> {
-                    setInvisibleProgress()
-                    setVisibleRV()
+                is DataStates.Success -> binding.apply {
+                    if((pair.second as DataStates.Success<SeriesModel>).data.results.isNotEmpty()) {
+                        cardSeries.show()
+                        detailSeriesRv.show()
+                    }
+                    detailDataProgress.hide()
                     seriesDataAdapter.submitList((pair.second as DataStates.Success<SeriesModel>).data.results)
                 }
             }
         }
-    }
-
-    private fun setInvisibleProgress() = binding.apply {
-        comicsProgressBar.hide()
-        seriesProgressBar.hide()
-    }
-
-    private fun setVisibleRV() = binding.apply {
-        detailComicsRv.show()
-        detailSeriesRv.show()
     }
 
     private fun setView() = binding.apply {
@@ -92,12 +94,28 @@ class DetailFragment : Fragment() {
 
         viewModel.character?.let {
             characterName.text = it.name
+
             GlideUtils
                 .getInstance(requireContext())
                 .load("${it.thumbnail.path}.${it.thumbnail.extension}")
                 .placeholder(R.drawable.placeholder_image)
                 .into(detailCharacterImage)
-            detailCharacterDescription.text = it.description
+
+            if(it.description.isBlank()) {
+                detailCharacterDescription.gone()
+            }
+            else {
+                detailCharacterDescription.text = it.description
+            }
         }
+
+        detailBtnBack.setOnClickListener {
+            findNavController().navigateUp()
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 }
