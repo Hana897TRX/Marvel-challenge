@@ -1,9 +1,9 @@
 package com.wizeline.heroes.data.models.model.home
 
 data class DataModel(
-    val offset: Int,
-    val limit: Int,
-    val total: Int,
-    val count: Int,
-    val results: List<ResultModel>,
+    var offset: Int,
+    var limit: Int,
+    var total: Int,
+    var count: Int,
+    var results: List<ResultModel>,
 )

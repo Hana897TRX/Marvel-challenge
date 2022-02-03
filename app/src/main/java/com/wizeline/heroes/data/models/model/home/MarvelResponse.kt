@@ -1,6 +1,6 @@
 package com.wizeline.heroes.data.models.model.home
 
-data class MarvelResponse<out T>(
+data class MarvelResponse<T>(
     val code: Int,
     val status: String,
     val copyright: String,

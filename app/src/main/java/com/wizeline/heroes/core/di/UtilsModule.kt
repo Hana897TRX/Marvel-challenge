@@ -9,6 +9,8 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
@@ -35,4 +37,8 @@ object UtilsModule {
     ) : RequestManager {
         return Glide.with(context)
     }
+
+    @Provides
+    fun provideDispatcher() : CoroutineDispatcher =
+        Dispatchers.Main
 }

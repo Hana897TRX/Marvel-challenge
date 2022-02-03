@@ -9,29 +9,31 @@ import com.wizeline.heroes.utils.ConstVals.EMPTY_VALUE
 import com.wizeline.heroes.utils.DataStates
 import com.wizeline.heroes.utils.Network
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
-import kotlinx.coroutines.launch
 import java.lang.Exception
 import javax.inject.Inject
 
 @HiltViewModel
 class SearchFragmentViewModel @Inject constructor(
-    private val searchUseCase: SearchUseCase
-): ViewModel() {
+    private val searchUseCase: SearchUseCase,
+    private val dispatcher: CoroutineDispatcher,
+) : ViewModel() {
 
-    private var _characters : MutableStateFlow<DataStates<DataModel>> = MutableStateFlow(DataStates.Loading)
-    private var _searchInput : MutableStateFlow<String> = MutableStateFlow("")
+    private var _characters: MutableStateFlow<DataStates<DataModel>> =
+        MutableStateFlow(DataStates.Loading)
+    private var _searchInput: MutableStateFlow<String> = MutableStateFlow("")
     private var _offset: MutableStateFlow<Int> = MutableStateFlow(0)
 
-    val characters : StateFlow<DataStates<DataModel>> = _characters
+    val characters: StateFlow<DataStates<DataModel>> = _characters
     val offset: StateFlow<Int> = _offset
 
     init {
         getCharacters()
     }
 
-    fun searchText(searchInput : String) = viewModelScope.launch {
-        if(searchInput != _searchInput.value) {
+    fun searchText(searchInput: String) = viewModelScope.launch(dispatcher) {
+        if (searchInput != _searchInput.value) {
             _searchInput.emit(searchInput)
             _characters.emit(DataStates.Loading)
             getCharacters()
@@ -51,7 +53,7 @@ class SearchFragmentViewModel @Inject constructor(
         getCharacters()
     }
 
-    fun setCustomOffset(number: CharSequence?) = viewModelScope.launch {
+    fun setCustomOffset(number: CharSequence?) = viewModelScope.launch(dispatcher) {
         try {
             if (!number.isNullOrEmpty()) {
                 number.toString().toInt().run {
@@ -66,15 +68,22 @@ class SearchFragmentViewModel @Inject constructor(
         }
     }
 
-    private fun getCharacters() = viewModelScope.launch {
-        _searchInput.zip(_offset) { input, offset  -> Pair(input, offset)}.debounce(350).collect { pair ->
-            searchUseCase.searchCharacters(pair.first, pair.second).collect { response ->
-                when(response) {
-                    is DataStates.Error -> _characters.emit(DataStates.Error(response.code, response.errorMessage))
-                    is DataStates.Loading -> _characters.emit(DataStates.Loading)
-                    is DataStates.Success -> _characters.emit(DataStates.Success(response.data))
-                }
+    fun getCharacters() = viewModelScope.launch(dispatcher) {
+        _searchInput.zip(_offset) { input, offset -> Pair(input, offset) }.debounce(250)
+            .collectLatest {
+                searchUseCase.searchCharacters(_searchInput.value, _offset.value)
+                    .collect { response ->
+                        when (response) {
+                            is DataStates.Error -> _characters.emit(
+                                DataStates.Error(
+                                    response.code,
+                                    response.errorMessage
+                                )
+                            )
+                            is DataStates.Loading -> _characters.emit(DataStates.Loading)
+                            is DataStates.Success -> _characters.emit(DataStates.Success(response.data))
+                        }
+                    }
             }
-        }
     }
 }
