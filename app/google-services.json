@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "683301788754",
+    "project_id": "heroesapp-training",
+    "storage_bucket": "heroesapp-training.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:683301788754:android:9be9736d0ce9aba043138b",
+        "android_client_info": {
+          "package_name": "com.wizeline.heroes"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "683301788754-uhjkhj8vcp58ag82meqptugcbaaba0q4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyByXhr3j74Sa1vdGpMwjTVSUS0wYC8sJek"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "683301788754-uhjkhj8vcp58ag82meqptugcbaaba0q4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:683301788754:android:32d0a1c7e95f228643138b",
+        "android_client_info": {
+          "package_name": "com.wizeline.heroes.debug"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "683301788754-uhjkhj8vcp58ag82meqptugcbaaba0q4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyByXhr3j74Sa1vdGpMwjTVSUS0wYC8sJek"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "683301788754-uhjkhj8vcp58ag82meqptugcbaaba0q4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

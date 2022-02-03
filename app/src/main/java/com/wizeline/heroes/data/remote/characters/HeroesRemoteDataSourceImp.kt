@@ -1,11 +1,12 @@
 package com.wizeline.heroes.data.remote.characters
 
 import com.wizeline.heroes.data.models.model.home.DataModel
-import com.wizeline.heroes.data.models.model.home.MarvelResponse
 import com.wizeline.heroes.data.network.HeroesService
 import com.wizeline.heroes.utils.ConstVals.EMPTY_VALUE
 import com.wizeline.heroes.utils.DataStates
 import com.wizeline.heroes.utils.DataUtils
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
@@ -14,7 +15,10 @@ import kotlin.Exception
 class HeroesRemoteDataSourceImp @Inject constructor(
     private val service: HeroesService
 ) : HeroesRemoteDataSource {
-    override suspend fun getCharacters(nameStartsWith : String?, offset: Int): Flow<DataStates<DataModel>> = flow {
+    override suspend fun getCharacters(
+        nameStartsWith: String?,
+        offset: Int
+    ): Flow<DataStates<DataModel>> = flow {
         try {
             val response =
                 service.characters(

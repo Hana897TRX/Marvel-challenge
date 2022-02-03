@@ -13,4 +13,6 @@
     <string name="home">Home</string>
     <string name="search">Search</string>
 
+    <!-- RemoteConfig -->
+    <string name="appBlocked"> The Application can not be used at this moment </string>
 </resources>

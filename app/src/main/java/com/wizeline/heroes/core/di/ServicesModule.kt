@@ -1,5 +1,8 @@
 package com.wizeline.heroes.core.di
 
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.remoteconfig.FirebaseRemoteConfig
+import com.google.firebase.remoteconfig.ktx.remoteConfig
 import com.wizeline.heroes.data.network.HeroesService
 import dagger.Module
 import dagger.Provides

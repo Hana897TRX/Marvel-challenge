@@ -9,6 +9,8 @@ import com.wizeline.heroes.utils.Network.QUERY_CHARACTER_ID
 import com.wizeline.heroes.utils.Network.QUERY_HASH
 import com.wizeline.heroes.utils.Network.QUERY_OFFSET
 import com.wizeline.heroes.utils.Network.QUERY_TS
+import io.reactivex.Observable
+import io.reactivex.Single
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -23,6 +25,15 @@ interface HeroesService {
         @Query(QUERY_API_KEY) apikey: String,
         @Query(QUERY_HASH) hash: String,
     ): Response<MarvelResponse<DataModel>>
+
+    @GET("characters")
+    fun charactersRx(
+        @Query(QUERY_OFFSET) offset : Int,
+        @Query(NAME_STARTS_WITH) nameStartsWith : String? = null,
+        @Query(QUERY_TS) ts: String,
+        @Query(QUERY_API_KEY) apikey: String,
+        @Query(QUERY_HASH) hash: String,
+    ): Single<Response<MarvelResponse<DataModel>>>
 
     @GET("characters/{characterId}/comics")
     suspend fun getComics(
