@@ -38,7 +38,11 @@
             app:argType="com.wizeline.heroes.data.models.model.home.ResultModel" />
         <action
             android:id="@+id/action_detailFragment2_to_searchFragment2"
-            app:destination="@id/searchFragment2" />
+            app:destination="@id/searchFragment2"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/slide_in"
+            app:popExitAnim="@anim/fade_out" />
     </fragment>
     <fragment
         android:id="@+id/searchFragment2"
@@ -50,6 +54,10 @@
             app:destination="@id/homeFragment" />
         <action
             android:id="@+id/action_searchFragment2_to_detailFragment2"
-            app:destination="@id/detailFragment2" />
+            app:destination="@id/detailFragment2"
+            app:enterAnim="@anim/fade_out"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_out"
+            app:popExitAnim="@anim/fade_out" />
     </fragment>
 </navigation>
